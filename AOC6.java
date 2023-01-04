@@ -3,26 +3,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AOC6 {
 	
-	
 	 private static String  loadFile (String fName) {
 	        File file = new File(fName);
-	        String zeile = "";
+	        String line = "";
 	        if (!file.canRead() || !file.isFile())
 	            System.exit(0);
 	            BufferedReader in = null;
 	        try {
-	            in = new BufferedReader(new FileReader(fName));
-	          
-	            zeile = in.readLine();
+	            in = new BufferedReader(new FileReader(fName));	          
+	            line = in.readLine();
 	            
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -33,10 +27,9 @@ public class AOC6 {
 	                } catch (IOException e) {
 	                }
 	        }
-	        return zeile;
+	        return line;
 	    }
-	 
-	 
+	 	 
 	 private static int process1(String input) {
 		String cr = "";
 		int res = 0;
@@ -50,36 +43,33 @@ public class AOC6 {
 	 }
 	 
 	 private static int process2(String input) {
-			String cr = "";
-			int res = 0;
-			 for (int i=0; i< input.length() - 14; i++) {
-				cr = input.substring(i,i+14);
-				if (checkRepeat(cr) == 1) {
-				    return i+14;		
-				}			
-			}
-		    return res;
-		 }
+		String cr = "";
+		int res = 0;
+		for (int i=0; i< input.length() - 14; i++) {
+		 cr = input.substring(i,i+14);
+		 if (checkRepeat(cr) == 1) {
+			return i+14;		
+		 }			
+		}
+	 return res;
+	}
 	 
 	 private static int checkRepeat(String input) {
 		 System.out.println(input);
 		  Pattern p = Pattern.compile("^(?:([A-Za-z])(?!.*\\1))*$");
 		  Matcher matcher = p.matcher(input);
 		if (matcher.find())
-			 return 1;
+			 return 1; //without duplicated chars
 		 else
-			 return 0; // richtig
+			 return 0; 
 	 }
 
-	    public static void main(String[] args) {
+	  public static void main(String[] args) {
 	        String fileName = "C:\\Natalia\\AOC22\\input6.txt";     
 	        String line = loadFile(fileName);
-	        System.out.println(line);
-	 //       System.out.println("Result: "+process1(line));
-	        System.out.println("Result: "+process2(line));
-	    
+	        System.out.println("Part1: "+process1(line));
+	        System.out.println("Part2: "+process2(line));
 	    }
-	    
-	  
+	    	  
 	}
 
